@@ -13,6 +13,18 @@
 #include<conio.h>
 using namespace std;
 
+
+void fun(char *mensajeCifrado, int*decodificador, int tamano){
+
+    cout<<"MENSAJE: ";
+    char *p=mensajeCifrado;
+    for(int i=0; i<tamano; i++){
+        p+=*(decodificador+i);
+        cout<<*p;
+    }
+
+}
+
 int main() {
 
     char mensajeCifrado[] = {
@@ -22,5 +34,13 @@ int main() {
     };
     int decodificador[] = { 2,17,-19,2,48,-44,35,-34,35,-42,2,44,1,-41,-6,2,4,40,5};
     //Seguir desde aqui el codigo a implementar
-	return 0;
-}
+    
+    fun(mensajeCifrado, decodificador, 19); 
+    return 0;
+
+    }
+
+
+    
+
+	

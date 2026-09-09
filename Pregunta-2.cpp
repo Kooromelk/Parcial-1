@@ -17,8 +17,8 @@
 #include<iostream>
 #include<conio.h>
 #include<string.h>
-
 using namespace std;
+
 
 char codificacionDecodificacion[] = {
         ' ','A','E','I','O','U','a','e','i','o','u',
@@ -27,13 +27,39 @@ char codificacionDecodificacion[] = {
 };
 
 // Función para cifrar un mensaje utilizando el cifrado César
-void cifrarMensaje(char* m, int desplazamiento,char* code) {
+void cifrarMensaje(char* m, int pasos, char* letra) {
 
+    for (char* p =m; *p != '\0'; p++) {
+
+        for (char* q = letra; q < letra + 53; q++) {
+            if (*p ==*q) {
+                int pos = ((q-letra) + pasos) % 53;
+                if (pos<0) pos += 53;
+                *p =*(letra+ pos);
+                break;
+            }
+        }
+    }
+    cout << "\nMensajini cifradini: " << m << endl;
 }
 
 // Función para descifrar un mensaje utilizando el cifrado César
-void descifrarMensaje(char* m, int desplazamiento, char* code) {
-
+void descifrarMensaje(char* m, int pasos, char* letra) {
+    
+    for (char* p=m; *p != '\0'; p++) {
+        
+        for (char* q = letra; q <letra + 53; q++) {
+           
+            if(*p ==*q) {
+                int pos = ((q -letra) -pasos) % 53;
+                if (pos<0) pos += 53;
+                *p = *(letra+ pos);
+                break;
+            }
+        }
+    }
+    
+    cout << "\nMENSAJE DESCIFRADOOOO: " << m << endl;
 
 }
 
@@ -42,7 +68,7 @@ int main() {
     int d = 0;
     cout << "Digite mensaje a cifrar: ";
     cin >> mensaje;
-    cout << "Digite desplazamiento: ";
+    cout << "Digite pasos: ";
     cin >> d;
     cifrarMensaje(mensaje, d,codificacionDecodificacion);
     cout <<endl << "Digite mensaje descifrar: ";
